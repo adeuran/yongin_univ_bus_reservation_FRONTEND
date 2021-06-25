@@ -1,18 +1,18 @@
 <template>
     <div>
-        <header-without-back> </header-without-back>
+        <top-header> </top-header>
         <login-body @login-clicked="loginClicked"></login-body>
   </div>
 </template>
 
 <script>
 import LoginBody from '@/organisms/LoginBody';
-import HeaderWithoutBack from '@/organisms/HeaderWithoutBack.vue';
+import TopHeader from '@/organisms/TopHimport TopHeader.vue';
 export default {
     name: 'LoginPage',
     components: {
         LoginBody,
-        HeaderWithoutBack,
+        TopHeader,
     },
     methods: {
         async loginClicked(identifier, password) {

@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import HeaderWithoutBack from '@/organisms/HeaderWithoutBack';
+import TopHeader from '@/organisms/TopHeader';
 import ReservationBody from '@/organisms/ReservationBody';
 export default {
     name: 'Reservation',
     components: {
-        HeaderWithoutBack,
+        TopHeader,
         ReservationBody,
     },
     data() {
