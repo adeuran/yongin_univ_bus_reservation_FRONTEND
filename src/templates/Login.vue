@@ -7,7 +7,7 @@
 
 <script>
 import LoginBody from '@/organisms/LoginBody';
-import TopHeader from '@/organisms/TopHimport TopHeader.vue';
+import TopHeader from '@/organisms/TopHeader.vue';
 export default {
     name: 'LoginPage',
     components: {

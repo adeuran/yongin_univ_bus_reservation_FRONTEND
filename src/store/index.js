@@ -28,6 +28,7 @@ export default new Vuex.Store({
     },
     getters: {
         // 쿠키에 토큰 불러오기
+        // 이래야 만료된 토큰은 날아감
         getToken(state) {
             state.accessToken = VueCookies.get('accessToken');
             state.refreshToken = VueCookies.get('refreshToken');

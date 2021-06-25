@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Main from '@/templates/Main';
 import Login from '@/templates/Login';
 import Reservation from '@/templates/Reservation';
+// ADMIN PAGE
+import StationList from '@/templates/admin/StationList';
 
 Vue.use(Router)
 
@@ -23,6 +25,12 @@ export default new Router({
       path: '/reservation',
       name: 'Reservation',
       component: Reservation,
+    },
+    // ADMIN PAGE
+    {
+      path: '/admin/station',
+      name: 'StationList',
+      component: StationList,
     },
   ]
 })
