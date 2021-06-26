@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import InputBox from '@/components/InputBox_Prefix_Icon.vue';
-import Button from '@/components/Button_Blue.vue';
+import InputBox from '@/components/InputBox_Prefix_Icon';
+import Button from '@/components/ButtonBlue';
 export default {
   name: 'LoginForm',
   components: {

@@ -27,8 +27,10 @@ export default new Router({
       component: Reservation,
     },
     // ADMIN PAGE
+
+    // Station
     {
-      path: '/admin/station',
+      path: '/admin/station/list',
       name: 'StationList',
       component: StationList,
     },
