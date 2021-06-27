@@ -1,57 +1,50 @@
-const DTO = require('./DTO');
+import DTO from './DTO';
 
-class StationDTO extends DTO {
-    // variables
-    #id;
-    #name;
-    #explain;
-    #position;
-    #image;
-
+export default class StationDTO extends DTO {
     //constructor
     constructor(id, name, explain, position, image) {
         super();
-        this.#id = id;
-        this.#name = name;
-        this.#explain = explain;
-        this.#position = position;
-        this.#image = image;
+        this._id = id;
+        this._name = name;
+        this._explain = explain;
+        this._position = position;
+        this._image = image;
     }
 
     //getter setter
     get id() {
-        return this.#id;
+        return this._id;
     }
     set id(id) {
-        this.#id = id;
+        this._id = id;
     }
 
     get name() {
-        return this.#name;
+        return this._name;
     }
     set name(name) {
-        this.#name = name;
+        this._name = name;
     }
 
     get explain() {
-        return this.#explain;
+        return this._explain;
     }
     set explain(explain) {
-        this.#explain = explain;
+        this._explain = explain;
     }
 
     get position() {
-        return this.#position;
+        return this._position;
     }
     set position(position) {
-        this.#position = position;
+        this._position = position;
     }
 
     get image() {
-        return this.#image;
+        return this._image;
     }
     set image(image) {
-        this.#image = image;
+        this._image = image;
     }
 
     toJSON() {
@@ -64,5 +57,3 @@ class StationDTO extends DTO {
         }
     }
 };
-
-module.exports = StationDTO;

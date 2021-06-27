@@ -1,5 +1,3 @@
-class DTO {
+export default class DTO {
     
 }
-
-module.exports = DTO;
