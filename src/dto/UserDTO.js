@@ -1,112 +1,99 @@
-const DTO = require('./DTO');
+import DTO from './DTO';
 
-class UserDTO extends DTO {
-    // variables
-    #id;
-    #identifier;
-    #password;
-    #name;
-    #email;
-    #phone;
-    #type;
-    #point;
-    #penalty;
-    #banned;
-    #state;
-
+export default class UserDTO extends DTO {
     //constructor
     constructor(id, identifier, password, name,
         email, phone, type="normal", point=0, penalty,
         banned, state = 'active') {
         super();
-        this.#id = id;
-        this.#identifier = identifier;
-        this.#password = password;
-        this.#name = name;
-        this.#email = email;
-        this.#phone = phone;
-        this.#type = type;
-        this.#point = point;
-        this.#penalty = penalty;
-        this.#banned = banned;
-        this.#state = state;
+        this._id = id;
+        this._identifier = identifier;
+        this._password = password;
+        this._name = name;
+        this._email = email;
+        this._phone = phone;
+        this._type = type;
+        this._point = point;
+        this._penalty = penalty;
+        this._banned = banned;
+        this._state = state;
     }
 
     get id() {
-        return this.#id;
+        return this._id;
     }
     set id(id) {
-        this.#id = id;
+        this._id = id;
     }
 
     get identifier() {
-        return this.#identifier;
+        return this._identifier;
     }
     set identifier(identifier) {
-        this.#identifier = identifier;
+        this._identifier = identifier;
     }
 
     get password() {
-        return this.#password;
+        return this._password;
     }
     set password(password) {
-        this.#password = password;
+        this._password = password;
     }
 
     get name() {
-        return this.#name;
+        return this._name;
     }
     set name(name) {
-        this.#name = name;
+        this._name = name;
     }
         
     get email() {
-        return this.#email;
+        return this._email;
     }
     set email(email) {
-        this.#email = email;
+        this._email = email;
     }
 
     get phone() {
-        return this.#phone;
+        return this._phone;
     }
     set phone(phone) {
-        this.#phone = phone;
+        this._phone = phone;
     }
 
     get type() {
-        return this.#type;
+        return this._type;
     }
     set type(type) {
-        this.#type = type;
+        this._type = type;
     }
         
     get point() {
-        return this.#point;
+        return this._point;
     }
     set point(point) {
-        this.#point = point;
+        this._point = point;
     }
         
     get penalty() {
-        return this.#penalty;
+        return this._penalty;
     }
     set penalty(penalty) {
-        this.#penalty = penalty;
+        this._penalty = penalty;
     }
         
     get banned() {
-        return this.#banned;
+        return this._banned;
     }
     set banned(banned) {
-        this.#banned = banned;
+        this._banned = banned;
     }
 
     get state() {
-        return this.#state;
+        return this._state;
     }
     set state(state) {
-        this.#state = state;
+        this._state = state;
     }
 
      toJSON() {
@@ -126,5 +113,3 @@ class UserDTO extends DTO {
     }
 
 };
-
-module.exports = UserDTO;
