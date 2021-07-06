@@ -8,6 +8,8 @@
 <script>
 import LoginBody from '@/organisms/LoginBody';
 import TopHeader from '@/organisms/TopHeader.vue';
+
+import auth from "@/utils/auth"
 export default {
     name: 'LoginPage',
     components: {
@@ -19,7 +21,8 @@ export default {
           try{
             await this.$store.dispatch('login', {identifier, password, });
             this.$router.replace('/');
-          } catch(erorr){
+          } catch(error){
+            console.log(error)
             this.LoginError();
           }
           
@@ -38,7 +41,7 @@ export default {
       }
     },
     beforeCreate() {
-      if(this.$store.getters.getToken.accessToken) {
+      if(auth.getAccessToken()) {
         this.$router.replace('/')
       }
     }

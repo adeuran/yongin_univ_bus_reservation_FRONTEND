@@ -12,6 +12,8 @@ import TopHeader from '@/organisms/TopHeader.vue';
 import MainImageWithTitle from '@/components/MainImageWithTitle.vue';
 import MainBody from '@/organisms/MainBody';
 import MainNotice from '@/organisms/MainNotice';
+
+import auth from "@/utils/auth"
 export default {
   name: 'MainPage',
   components: {
@@ -21,7 +23,7 @@ export default {
     MainNotice,
   },
   beforeCreate() {
-      if(!this.$store.getters.getToken.accessToken) {
+      if(!auth.getAccessToken()) {
         this.$router.replace('/login')
       }
     }

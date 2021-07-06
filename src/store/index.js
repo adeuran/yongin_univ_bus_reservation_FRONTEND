@@ -1,41 +1,65 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import VueCookies from 'vue-cookies'
+import VueCookies from 'vue-cookies';
+import TokenDTO from '@/dto/TokenDTO';
 
 
 Vue.use(Vuex);
 
-
 export default new Vuex.Store({
     state: {
-        host:'http://localhost:3000',
-        accessToken: VueCookies.get('accessToken'),
-        refreshToken: VueCookies.get('refreshToken'),
-    },
-    mutations: {
-        loginToken(state, {accessToken,refreshToken}) {
-            VueCookies.set('accessToken', accessToken, '1H');
-            VueCookies.set('refreshToken', refreshToken, '14D');
-            state.accessToken = accessToken;
-            state.refreshToken = refreshToken;
-        },
-        removeToken(state) {
-            VueCookies.remove('accessToken');
-            VueCookies.remove('refreshToken');
-            state.accessToken = '';
-            state.refreshToken = '';
-        }
+        host:'//localhost:3000',
+        accessToken: null,
+        refreshToken: null,
     },
     getters: {
-        // 쿠키에 토큰 불러오기
-        // 이래야 만료된 토큰은 날아감
-        getToken(state) {
-            state.accessToken = VueCookies.get('accessToken');
-            state.refreshToken = VueCookies.get('refreshToken');
+        getTokens(state) {
             return {
-                accessToken: state.accessToken,
-                refreshToken: state.refreshToken,
+                accessToken: state.accessToken?state.accessToken:null,
+                refreshToken: state.refreshToken?state.refreshToken:null,
             };
+        },
+        getOnlyTokens(state) {
+            return {
+                accessToken: state.accessToken?state.accessToken.token:null,
+                refreshToken: state.refreshToken?state.refreshToken.token:null,
+            };
+        }
+    },
+    mutations: {
+        setAccessToken(state, accessToken) {
+            VueCookies.set('accessToken', accessToken, '1H');
+            state.accessToken = new TokenDTO();
+            state.accessToken.token = accessToken;
+        },
+        loadAccessToken(state) {
+            const cookieValue = VueCookies.get('accessToken');
+            if (!cookieValue)
+                state.accessToken = null;
+            else {
+                state.accessToken = new TokenDTO();
+                state.accessToken.token = cookieValue;
+            }
+        },
+        setRefreshToken(state, refreshToken) {
+            VueCookies.set('refreshToken', refreshToken, '14D');
+            state.refreshToken = new TokenDTO();
+            state.refreshToken.token = refreshToken;
+        },
+        loadRefreshToken(state) {
+            const cookieValue = VueCookies.get('refreshToken');
+            if (!cookieValue)
+                state.refreshToken = null;
+            else {
+                state.refreshToken = new TokenDTO();
+                state.refreshToken.token = cookieValue;
+            }
+        },
+        deleteAllToken(state) {
+            VueCookies.remove('accessToken');
+            VueCookies.remove('refreshToken');
+            state.accessToken = null;
+            state.refreshToken = null;
         }
     },
     actions: {
@@ -50,16 +74,15 @@ export default new Vuex.Store({
                     "Content-type": "application/json; charset=UTF-8"
                 }
             };
-            const response = await fetch(context.state.host + '/user/login', option);
+            let response = await fetch(context.state.host + '/user/login', option);
             if (response.ok) {
-                const tokens = await response.json();
-                return context.commit('loginToken', {
-                    refreshToken: tokens.refreshToken,
-                    accessToken: tokens.accessToken,
-                });
+                const responseBody = await response.json();
+                context.commit('setAccessToken', responseBody.accessToken);
+                context.commit('setRefreshToken', responseBody.refreshToken);
             } else {
-                throw new Error("HTTP error " + response.status);
+                throw new Error("LOGIN ERROR");
             }
+            
         },
     }
 });

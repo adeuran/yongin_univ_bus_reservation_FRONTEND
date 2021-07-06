@@ -1,47 +1,42 @@
-const DTO = require('./DTO');
-const UserDTO = require('../dto/UserDTO');
-class TokenDTO extends DTO {
-    // variables
-    #id;
-    #user;
-    #token;
-    #issued;
+import DTO from './DTO';
+import UserDTO from '../dto/UserDTO';
+export default class TokenDTO extends DTO {
 
     //constructor
     constructor(id, user = new UserDTO(), token, issued) {
         super();
-        this.#id = id;
-        this.#user = user;
-        this.#token = token;
-        this.#issued = issued;
+        this._id = id;
+        this._user = user;
+        this._token = token;
+        this._issued = issued;
     }
 
     get id() {
-        return this.#id;
+        return this._id;
     }
     set id(id) {
-        this.#id = id;
+        this._id = id;
     }
 
     get user() {
-        return this.#user;
+        return this._user;
     }
     set user(user) {
-        this.#user = user;
+        this._user = user;
     }
 
     get token() {
-        return this.#token;
+        return this._token;
     }
     set token(token) {
-        this.#token = token;
+        this._token = token;
     }
 
     get issued() {
-        return this.#issued;
+        return this._issued;
     }
     set issued(issued) {
-        this.#issued = issued;
+        this._issued = issued;
     }
 
      toJSON() {
@@ -54,5 +49,3 @@ class TokenDTO extends DTO {
     }
 
 };
-
-module.exports = TokenDTO;
