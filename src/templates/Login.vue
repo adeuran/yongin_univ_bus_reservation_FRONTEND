@@ -34,6 +34,7 @@ export default {
             size: 'sm',
             buttonSize: 'sm',
             okVariant: 'info',
+            okTitle: '확인',
             headerClass: 'p-2 border-bottom-0',
             footerClass: 'p-2 border-top-0',
             centered: true
