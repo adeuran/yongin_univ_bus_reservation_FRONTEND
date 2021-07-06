@@ -10,6 +10,7 @@ import TopHeader from "@/organisms/TopHeader.vue";
 import StationListBody from "@/organisms/StationListBody.vue";
 
 import StationDTO from "@/dto/StationDTO";
+import StationApi from "@/api/station.api.js";
 
 export default {
   components: {
@@ -24,20 +25,7 @@ export default {
           { key: 'explain', label: '세부설명', sortable: true },
           { key: 'actions', label: '동작', class: 'text-center', thStyle: 'width:7rem'}
         ],
-       listItems: [
-        new StationDTO(1, "학교", "학교앞 네거리"),
-        new StationDTO(2,'잠실',"잠실옆동네"),
-        new StationDTO(3,'동대문',"동대문과 남대문 사이"),
-        new StationDTO(4,"남산","남산과 뒷산 사이"),
-        new StationDTO(6,'방돌',"거실돌 옆 방돌"),
-        new StationDTO(5,'신세계',"손모가지 역 앞"),
-        new StationDTO(7,'안양',"우리집 근처 역에서"),
-        new StationDTO(8,'옆산',"뒷산과 옆산 사이"),
-        new StationDTO(9,'뒷산',"동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세. 무궁화삼천리 화려강산 대한사람 대한으로 길이 보전하세."),
-        new StationDTO(10,'화분',"국산아니면 안받아요"),
-        new StationDTO(12,'사슴',"고라니와는 다른 동물"),
-        new StationDTO(11,'너구리',"너굴맨은 너구리가 아닙니다"),
-      ],
+       listItems: null,
     };
   },
   methods: {
@@ -47,7 +35,39 @@ export default {
     tableBtnClick(item, index) {
       console.log("Clicked At ",index)
       console.log("item", item)
-    }
+    },
+    async getAllStation() {
+      try {
+      const response = await StationApi.getAll();
+      if(response) {
+        this.listItems = new Array();
+        response.forEach(
+        (obj) => {
+          this.listItems.push(new StationDTO(obj.id, obj.name, obj.explain))
+        }
+      );
+      }
+      } catch (error){
+        this.LoginError();
+        this.listItems = new Array();
+      }
+      
+      
+    },
+    LoginError() {
+          this.$bvModal.msgBoxOk('통신중 문제가 발생했습니다. 반복해서 문제 발생시 관리자에게 문의해주세요.', {
+            title: '오류',
+            buttonSize: 'sm',
+            okVariant: 'info',
+            okTitle: '확인',
+            headerClass: 'p-2 border-bottom-0',
+            footerClass: 'p-2 border-top-0',
+            centered: true
+          });
+      }
+  },
+   created() {
+    this.getAllStation();
   }
 
 };

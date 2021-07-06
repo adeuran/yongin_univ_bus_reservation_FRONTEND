@@ -6,6 +6,7 @@
   show-empty
   fixed
   :fields="fields"
+  :busy="isBusy"
   sticky-header="70vh"
   :sort-by.sync="sortBy"
   >
@@ -14,6 +15,12 @@
           {{ BtnName }}
         </b-button>
     </template>
+    <template #table-busy>
+        <div class="text-center text-info my-2">
+          <b-spinner class="align-middle"></b-spinner>
+          <strong>불러오는중...</strong>
+        </div>
+      </template>
   </b-table>
 </template>
 
@@ -23,6 +30,7 @@ export default {
   data() {
     return {
       sortBy: 'id',
+      isBusy: true,
     }
   },
   props: {
@@ -33,8 +41,20 @@ export default {
   methods: {
     click(item, index) {
       this.$emit("click",item, index);
+    },
+  },
+  watch: {
+    // props가 비동기로 데이터를 불러왔다면
+    items: {
+      handler(value, oldValue) {
+      if (this.items != null)
+        this.isBusy = false;
+      else
+        this.isBusy = true;
+    },
+    immediate: true,
     }
-  }
+  },
 }
 </script>
   

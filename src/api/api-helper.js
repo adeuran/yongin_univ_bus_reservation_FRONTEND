@@ -41,7 +41,6 @@ export default {
     },
     getOption(type, body) {
         const tokens = authUtil.getTokens();
-        console.log(tokens);
         return {
                 method: type,
                 body: JSON.stringify(body),
