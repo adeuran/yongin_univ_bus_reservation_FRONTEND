@@ -5,6 +5,8 @@ import Login from '@/templates/Login';
 import Reservation from '@/templates/Reservation';
 // ADMIN PAGE
 import StationList from '@/templates/admin/StationList';
+import StationAdd from '@/templates/admin/StationAdd';
+import StationEdit from '@/templates/admin/StationEdit';
 
 Vue.use(Router)
 
@@ -33,6 +35,16 @@ export default new Router({
       path: '/admin/station/list',
       name: 'StationList',
       component: StationList,
+    },
+    {
+      path: '/admin/station/add',
+      name: 'StationAdd',
+      component: StationAdd,
+    },
+    {
+      path: '/admin/station/edit/:id',
+      name: 'StationEdit',
+      component: StationEdit,
     },
   ]
 })
